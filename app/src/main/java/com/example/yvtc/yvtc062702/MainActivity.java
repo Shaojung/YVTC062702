@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,5 +31,14 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("geo:0,0?q=幼獅職訓場");
         Intent it = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(it);
+    }
+    public void clickShare(View v)
+    {
+        Intent sendTextIntent = new Intent();
+        sendTextIntent.setAction(Intent.ACTION_SEND);
+        sendTextIntent.setType("text/plain");
+        EditText ed = (EditText) findViewById(R.id.editText);
+        sendTextIntent.putExtra(Intent.EXTRA_TEXT, ed.getText().toString());
+        startActivity(Intent.createChooser(sendTextIntent, " 請選擇分享對象 "));
     }
 }
